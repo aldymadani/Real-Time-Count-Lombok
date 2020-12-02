@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667782856530",
+    "firebase_url": "https://real-time-count.firebaseio.com",
+    "project_id": "real-time-count",
+    "storage_bucket": "real-time-count.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667782856530:android:d564e28608d3329255048b",
+        "android_client_info": {
+          "package_name": "com.example.realtimecountlombok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667782856530-mbf4l89vupb0b0b0l6q57hteuijbe5n5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyIYZGrFUrZ2ivhfeczw7ehuBWqHwin0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667782856530-mbf4l89vupb0b0b0l6q57hteuijbe5n5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

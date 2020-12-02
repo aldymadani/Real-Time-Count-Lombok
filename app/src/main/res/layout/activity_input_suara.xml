@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputSuaraActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/inputSuaraTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Input Suara"
+            android:textColor="@color/colorPrimary"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/inputSuaraKecamatanSpinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Kecamatan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraTitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraNomorTPSLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraKecamatanSpinner"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraKecamatanSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraKecamatanSpinner">
+
+            <EditText
+                android:id="@+id/inputSuaraNomorTPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor TPS"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraDesaLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraNomorTPSLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraNomorTPSLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraNomorTPSLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraDesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Desa"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraCalonSatuLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraDesaLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraDesaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraDesaLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraCalonSatu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calon Nomor 1"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraCalonDuaLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraCalonSatuLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraCalonSatuLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraCalonSatuLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraCalonDua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calon Nomor 2"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraCalonTigaLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraCalonDuaLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraCalonDuaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraCalonDuaLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraCalonTiga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calon Nomor 3"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraCalonEmpatLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraCalonTigaLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraCalonTigaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraCalonTigaLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraCalonEmpat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calon Nomor 4"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraCalonLimaLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraCalonEmpatLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraCalonEmpatLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraCalonEmpatLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraCalonLima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Calon Nomor 5"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraTotalSuaraTidakSahLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraCalonLimaLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraCalonLimaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraCalonLimaLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraTotalSuaraTidakSah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total Suara Tidak Sah"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSuaraTotalSuaraTidakHadirLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraTotalSuaraTidakSahLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraTotalSuaraTidakSahLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraTotalSuaraTidakSahLayout">
+
+            <EditText
+                android:id="@+id/inputSuaraTotalSuaraTidakHadir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total DPT Tidak Hadir"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/inputSuaraBuktiSuratSuaraTextView"
+            style="@style/ShadowForText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Bukti Surat Suara"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraTotalSuaraTidakHadirLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraTotalSuaraTidakHadirLayout" />
+
+        <ImageView
+            android:id="@+id/inputSuaraBuktiSuratSuaraImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/insert_image"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraTotalSuaraTidakHadirLayout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraTotalSuaraTidakHadirLayout"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraBuktiSuratSuaraTextView" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/inputSuaraKonfirmasiButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Konfirmasi Data"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:textSize="14sp"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraBuktiSuratSuaraImage"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraBuktiSuratSuaraImage"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraBuktiSuratSuaraImage" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/inputSuaraLogOut"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:textSize="14sp"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/inputSuaraKonfirmasiButton"
+            app:layout_constraintStart_toStartOf="@+id/inputSuaraKonfirmasiButton"
+            app:layout_constraintTop_toBottomOf="@+id/inputSuaraKonfirmasiButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
