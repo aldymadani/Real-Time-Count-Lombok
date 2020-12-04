@@ -13,11 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealTimeCountLombok.Light">
-        <activity android:name=".TotalSuaraKecamatanActivity"></activity>
-        <activity android:name=".TotalSuaraActivity" />
+        <activity android:name=".general.RegisterActivity"></activity>
+        <activity android:name=".admin.EditSuaraActivity" />
+        <activity android:name=".admin.MainManageSuaraActivity" />
+        <activity android:name=".general.TotalSuaraKecamatanActivity" />
+        <activity android:name=".general.TotalSuaraActivity" />
         <activity android:name=".InputSuaraActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".general.LoginActivity" />
+        <activity android:name=".general.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

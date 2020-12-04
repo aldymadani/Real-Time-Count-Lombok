@@ -1,4 +1,4 @@
-package com.example.realtimecountlombok;
+package com.example.realtimecountlombok.general;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.realtimecountlombok.InputSuaraActivity;
+import com.example.realtimecountlombok.R;
+import com.example.realtimecountlombok.admin.MainManageSuaraActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private EditText emailField, passwordField;
-    private Button btnSubmit, btnRegister, totalSuaraButton, totalSuaraKecamatanButton;
+    private Button btnSubmit, btnRegister, totalSuaraButton, totalSuaraKecamatanButton, registerButton;
     private FirebaseAuth mFirebaseAuth;
     private TextInputLayout textInputEmail, textInputPassword;
 
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnRegister = findViewById(R.id.loginCekSuaraButton);
         textInputEmail = findViewById(R.id.loginEmailLayout);
         textInputPassword = findViewById(R.id.loginPasswordLayout);
+        registerButton = findViewById(R.id.loginRegisterButton);
 
         emailField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -54,6 +58,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 textInputPassword.setErrorEnabled(false);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -173,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     textInputPassword.setErrorEnabled(false);
                     textInputEmail.setErrorEnabled(false);
                     String uuid = mFirebaseAuth.getCurrentUser().getUid();
-                    Intent intent = new Intent(LoginActivity.this, InputSuaraActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainManageSuaraActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }

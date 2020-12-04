@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".general.LoginActivity">
 
     <TextView
         android:id="@+id/loginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Real Time Count Lombok 2020"
+        android:text="REAL COUNT PILKADA LOMBOK TENGAH 2020"
         android:gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
@@ -71,6 +71,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginRegisterButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/loginPasswordLayout"
+        app:layout_constraintStart_toStartOf="@+id/loginPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordLayout"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
+
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/loginSignInButton"
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="0dp"
@@ -81,9 +98,9 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         android:textSize="14sp"
         app:backgroundTint="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="@+id/loginPasswordLayout"
-        app:layout_constraintStart_toStartOf="@+id/loginPasswordLayout"
-        app:layout_constraintTop_toBottomOf="@+id/loginPasswordLayout"
+        app:layout_constraintEnd_toEndOf="@+id/loginRegisterButton"
+        app:layout_constraintStart_toStartOf="@+id/loginRegisterButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginRegisterButton"
         app:layout_goneMarginBottom="16dp" />
 
     <com.google.android.material.button.MaterialButton

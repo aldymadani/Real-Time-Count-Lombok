@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputSuaraActivity">
+    tools:context=".admin.EditSuaraActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraTitle" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraNomorTPSLayout"
+            android:id="@+id/editSuaraDesaLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,26 +51,6 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraKecamatanSpinner">
 
             <EditText
-                android:id="@+id/editSuaraNomorTPS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nomor TPS"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraDesaLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraNomorTPSLayout"
-            app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraNomorTPSLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraNomorTPSLayout">
-
-            <EditText
                 android:id="@+id/editSuaraDesa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +59,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonSatuLayout"
+            android:id="@+id/editSuaraNomorTPSLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,6 +69,26 @@
             app:layout_constraintHorizontal_bias="0.452"
             app:layout_constraintStart_toStartOf="@+id/editSuaraDesaLayout"
             app:layout_constraintTop_toBottomOf="@+id/editSuaraDesaLayout">
+
+            <EditText
+                android:id="@+id/editSuaraNomorTPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor TPS"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editSuaraCalonSatuLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraNomorTPSLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/editSuaraNomorTPSLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraNomorTPSLayout">
 
             <EditText
                 android:id="@+id/editSuaraCalonSatu"
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonSatuLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonDua"
+                android:id="@+id/editSuaraCalonDua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 2"
@@ -131,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonDuaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonTiga"
+                android:id="@+id/editSuaraCalonTiga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 3"
@@ -151,7 +151,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonTigaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonEmpat"
+                android:id="@+id/editSuaraCalonEmpat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 4"
@@ -171,7 +171,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonEmpatLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonLima"
+                android:id="@+id/editSuaraCalonLima"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 5"
@@ -191,7 +191,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonLimaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraTotalSuaraTidakSah"
+                android:id="@+id/editSuaraTotalSuaraTidakSah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total Suara Tidak Sah"
@@ -211,7 +211,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editSuaraTotalSuaraTidakSahLayout">
 
             <EditText
-                android:id="@+id/inputSuaraTotalSuaraTidakHadir"
+                android:id="@+id/editSuaraTotalSuaraTidakHadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total DPT Tidak Hadir"

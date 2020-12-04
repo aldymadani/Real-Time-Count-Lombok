@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_input_suara"
+        android:icon="@drawable/ic_manual_voting"
+        android:title="Input Suara" />
+
+    <item
+        android:id="@+id/nav_cek_suara"
+        android:icon="@drawable/ic_archive"
+        android:title="Cek Suara" />
+
+</menu>

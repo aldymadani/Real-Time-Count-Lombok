@@ -1,4 +1,4 @@
-package com.example.realtimecountlombok;
+package com.example.realtimecountlombok.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.example.realtimecountlombok.InputSuaraActivity;
+import com.example.realtimecountlombok.R;
+import com.example.realtimecountlombok.admin.MainManageSuaraActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,7 +31,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     // User is signed in, send to main menu
-                    Intent intent = new Intent(SplashScreenActivity.this, InputSuaraActivity.class);
+                    Intent intent = new Intent(SplashScreenActivity.this, MainManageSuaraActivity.class);
                     startActivity(intent);
                 } else {
                     // User is signed out, send to login page

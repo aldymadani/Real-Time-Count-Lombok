@@ -1,10 +1,4 @@
-package com.example.realtimecountlombok;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+package com.example.realtimecountlombok.admin;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,16 +7,31 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.realtimecountlombok.InputSuaraActivity;
+import com.example.realtimecountlombok.R;
+import com.example.realtimecountlombok.adapter.ListSuaraAdapter;
 import com.example.realtimecountlombok.general.LoginActivity;
 import com.example.realtimecountlombok.model.SuaraKecamatan;
 import com.example.realtimecountlombok.util.constant.RequestCodeConstant;
@@ -33,6 +42,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,10 +54,13 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class InputSuaraActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+import static android.app.Activity.RESULT_OK;
 
-    private static final String TAG = "InputSuaraActivity";
+public class InputSuaraFragment extends Fragment implements View.OnFocusChangeListener {
 
+    private static final String TAG = "InputSuaraFragment";
+
+    View view;
 
     EditText nomorTPS, desa, calonPertama, calonKedua, calonKetiga, calonKeempat, calonKelima, totalSuaraTidakSah, totalDPTTidakHadir;
     TextInputLayout nomorTPSLayout, desaLayout, calonPertamaLayout, calonKeduaLayout, calonKetigaLayout, calonKeempatLayout, calonKelimaLayout, totalSuaraTidakSahLayout, totalDPTTidakHadirLayout;
@@ -62,10 +75,12 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
     final String suaraKecamatanId = db.collection("SuaraKecamatan").document().getId();
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_suara);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_input_suara, container, false);
         componentsInitialization();
 
         konfirmasiButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +89,7 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
                 if (informationValidation(nomorTPS.getText().toString(), desa.getText().toString(), calonPertama.getText().toString(), calonKedua.getText().toString(), calonKetiga.getText().toString(), calonKeempat.getText().toString(), calonKelima.getText().toString(), totalSuaraTidakSah.getText().toString(), totalDPTTidakHadir.getText().toString())) {
                     handleUpload(bitmap);
                 } else {
-                    Toast.makeText(InputSuaraActivity.this, "Tolong isi semua data terlebih dahulu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Tolong isi semua data terlebih dahulu", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -83,10 +98,9 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(InputSuaraActivity.this, LoginActivity.class);
+                Intent intent = new Intent(getContext(), MainManageSuaraActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -94,7 +108,7 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestCodeConstant.GALLERY_PICK);
                 } else {
                     Intent galleryIntent = new Intent();
@@ -104,6 +118,8 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
                 }
             }
         });
+
+        return view;
     }
 
     @Override
@@ -116,20 +132,20 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, RequestCodeConstant.GALLERY_PICK);
             } else {
-                Toast.makeText(this, "Media Storage Permission Denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Media Storage Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RequestCodeConstant.GALLERY_PICK) {
             switch (resultCode) {
                 case RESULT_OK:
                     Uri ImageURI = data.getData();
                     try {
-                        bitmap = MediaStore.Images.Media.getBitmap(InputSuaraActivity.this.getContentResolver(), ImageURI);
+                        bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), ImageURI);
                         buktiSuaraImage.setImageBitmap(bitmap);
                         hasImage = true;
                     } catch (IOException e) {
@@ -144,7 +160,7 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-        final StorageReference reference = FirebaseStorage.getInstance().getReference().child("bukti-surat-suara").child(suaraKecamatanId + ".jpeg");
+        final StorageReference reference = FirebaseStorage.getInstance().getReference().child(kecamatan.getSelectedItem().toString()).child(kecamatan.getSelectedItem().toString() + " " + nomorTPS.getText().toString() + ".jpeg");
 
         reference.putBytes(baos.toByteArray())
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -187,6 +203,8 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
         suaraKecamatan.setTotalSuaraTidakSah(Integer.parseInt(dataTotalSuaraTidakSah));
         suaraKecamatan.setTotalDPTTidakHadir(Integer.parseInt(dataTotalDPTTidakHadir));
         suaraKecamatan.setImageURL(buktiSuratSuaraURL);
+        suaraKecamatan.setSuaraKecamatanId(suaraKecamatanId);
+        suaraKecamatan.setEditLimit(0);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         suaraKecamatan.setCreatedBy(user.getEmail());
@@ -224,14 +242,19 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
         batch.update(suaraKeseluruhanRef, "totalSuaraCalonKelima", FieldValue.increment(dataCalonKelima));
         batch.update(suaraKeseluruhanRef, "totalSuaraTidakSah", FieldValue.increment(dataTotalSuaraTidakSah));
         batch.update(suaraKeseluruhanRef, "totalDPTTidakHadir", FieldValue.increment(dataTotalDPTTidakHadir));
+        batch.update(suaraKeseluruhanRef, "totalTPS", FieldValue.increment(1));
 
         batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(InputSuaraActivity.this, "Total Suara Telah Berhasil Dimasukkan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Total Suara Telah Berhasil Dimasukkan", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), MainManageSuaraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
     }
+
 
     private boolean informationValidation(String dataNomorTPS, String dataDesa, String dataCalonPertama, String dataCalonKedua, String dataCalonKetiga, String dataCalonKeempat, String dataCalonKelima, String dataTotalSuaraTidakSah, String dataTotalDPTTidakHadir) {
         boolean isValid = false;
@@ -291,7 +314,7 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
         }
 
         if (!hasImage) {
-            Toast.makeText(this, "Tolong masukkan bukti suara", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Tolong masukkan bukti suara", Toast.LENGTH_SHORT).show();
         }
 
         if (noTPSValid && desaValid && calonPertamaValid && calonKeduaValid && calonKetigaValid && calonKeempatValid && calonKelimaValid && totalSuaraTidakSahValid && totalDPTTidakHadirValid && hasImage) {
@@ -302,31 +325,31 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
     }
 
     private void componentsInitialization() {
-        kecamatan = findViewById(R.id.editSuaraKecamatanSpinner);
-        nomorTPS = findViewById(R.id.editSuaraNomorTPS);
-        desa = findViewById(R.id.editSuaraDesa);
-        calonPertama = findViewById(R.id.editSuaraCalonSatu);
-        calonKedua = findViewById(R.id.inputSuaraCalonDua);
-        calonKetiga = findViewById(R.id.inputSuaraCalonTiga);
-        calonKeempat = findViewById(R.id.inputSuaraCalonEmpat);
-        calonKelima = findViewById(R.id.inputSuaraCalonLima);
-        totalSuaraTidakSah = findViewById(R.id.inputSuaraTotalSuaraTidakSah);
-        totalDPTTidakHadir = findViewById(R.id.inputSuaraTotalSuaraTidakHadir);
+        kecamatan = view.findViewById(R.id.inputSuaraKecamatanSpinner);
+        nomorTPS = view.findViewById(R.id.inputSuaraNomorTPS);
+        desa = view.findViewById(R.id.inputSuaraDesa);
+        calonPertama = view.findViewById(R.id.inputSuaraCalonSatu);
+        calonKedua = view.findViewById(R.id.inputSuaraCalonDua);
+        calonKetiga = view.findViewById(R.id.inputSuaraCalonTiga);
+        calonKeempat = view.findViewById(R.id.inputSuaraCalonEmpat);
+        calonKelima = view.findViewById(R.id.inputSuaraCalonLima);
+        totalSuaraTidakSah = view.findViewById(R.id.inputSuaraTotalSuaraTidakSah);
+        totalDPTTidakHadir = view.findViewById(R.id.inputSuaraTotalSuaraTidakHadir);
 
-        nomorTPSLayout = findViewById(R.id.editSuaraNomorTPSLayout);
-        desaLayout = findViewById(R.id.editSuaraDesaLayout);
-        calonPertamaLayout = findViewById(R.id.editSuaraCalonSatuLayout);
-        calonKeduaLayout = findViewById(R.id.editSuaraCalonDuaLayout);
-        calonKetigaLayout = findViewById(R.id.editSuaraCalonTigaLayout);
-        calonKeempatLayout = findViewById(R.id.editSuaraCalonEmpatLayout);
-        calonKelimaLayout = findViewById(R.id.editSuaraCalonLimaLayout);
-        totalSuaraTidakSahLayout = findViewById(R.id.editSuaraTotalSuaraTidakSahLayout);
-        totalDPTTidakHadirLayout = findViewById(R.id.editSuaraTotalSuaraTidakHadirLayout);
+        nomorTPSLayout = view.findViewById(R.id.inputSuaraNomorTPSLayout);
+        desaLayout = view.findViewById(R.id.inputSuaraDesaLayout);
+        calonPertamaLayout = view.findViewById(R.id.inputSuaraCalonSatuLayout);
+        calonKeduaLayout = view.findViewById(R.id.inputSuaraCalonDuaLayout);
+        calonKetigaLayout = view.findViewById(R.id.inputSuaraCalonTigaLayout);
+        calonKeempatLayout = view.findViewById(R.id.inputSuaraCalonEmpatLayout);
+        calonKelimaLayout = view.findViewById(R.id.inputSuaraCalonLimaLayout);
+        totalSuaraTidakSahLayout = view.findViewById(R.id.inputSuaraTotalSuaraTidakSahLayout);
+        totalDPTTidakHadirLayout = view.findViewById(R.id.inputSuaraTotalSuaraTidakHadirLayout);
 
-        konfirmasiButton = findViewById(R.id.editSuaraKonfirmasiButton);
-        logOutButton = findViewById(R.id.editSuaraLogOut);
+        konfirmasiButton = view.findViewById(R.id.inputSuaraKonfirmasiButton);
+        logOutButton = view.findViewById(R.id.inputSuaraLogOut);
 
-        buktiSuaraImage = findViewById(R.id.editSuaraBuktiSuratSuaraImage);
+        buktiSuaraImage = view.findViewById(R.id.inputSuaraBuktiSuratSuaraImage);
 
         nomorTPS.setOnFocusChangeListener(this);
         desa.setOnFocusChangeListener(this);
@@ -340,7 +363,7 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
 
         String listKecamatan[] = {"Kec. Praya", "Kec. Praya Tengah", "Kec. Praya Barat", "Kec. Praya Barat Daya", "Kec. Praya Timur",
                 "Kec. Pujut", "Kec. Janapria", "Kec. Batukliang", "Kec. Batukliang Utara", "Kec. Jonggat", "Kec. Kopang", "Kec. Pringgarata"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, listKecamatan);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, listKecamatan);
         kecamatan.setAdapter(arrayAdapter);
 
         hasImage = false;
@@ -349,13 +372,13 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
     @Override
     public void onFocusChange(View view, boolean b) {
         switch (view.getId()) {
-            case R.id.editSuaraNomorTPS:
+            case R.id.inputSuaraNomorTPS:
                 nomorTPSLayout.setErrorEnabled(false);
                 break;
-            case R.id.editSuaraDesa:
+            case R.id.inputSuaraDesa:
                 desaLayout.setErrorEnabled(false);
                 break;
-            case R.id.editSuaraCalonSatu:
+            case R.id.inputSuaraCalonSatu:
                 calonPertamaLayout.setErrorEnabled(false);
                 break;
             case R.id.inputSuaraCalonDua:
@@ -369,6 +392,12 @@ public class InputSuaraActivity extends AppCompatActivity implements View.OnFocu
                 break;
             case R.id.inputSuaraCalonLima:
                 calonKelimaLayout.setErrorEnabled(false);
+                break;
+            case R.id.inputSuaraTotalSuaraTidakHadir:
+                totalDPTTidakHadirLayout.setErrorEnabled(false);
+                break;
+            case R.id.inputSuaraTotalSuaraTidakSah:
+                totalSuaraTidakSahLayout.setErrorEnabled(false);
                 break;
         }
     }

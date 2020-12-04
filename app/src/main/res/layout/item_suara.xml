@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemSuara"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="8dp"
+
+    app:cardBackgroundColor="#87ceeb">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/listSuaraImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_voting"
+            app:layout_constraintBottom_toBottomOf="@+id/totalSuaraItemSuara"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/namaKecamatanItemSuara" />
+
+        <TextView
+            android:id="@+id/namaKecamatanItemSuara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_city_24dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical|start"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/listSuaraImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nama Kecamatan"/>
+
+        <TextView
+            android:id="@+id/nomorTPSItemSuara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@drawable/ic_voting_box_24dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical|start"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/totalSuaraItemSuara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/listSuaraImage"
+            app:layout_constraintTop_toBottomOf="@+id/namaKecamatanItemSuara"
+            tools:text="TPS 001"/>
+
+        <TextView
+            android:id="@+id/totalSuaraItemSuara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_vote"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical|start"
+            android:text="Total Suara"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/listSuaraImage"
+            tools:text="Total Suara"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

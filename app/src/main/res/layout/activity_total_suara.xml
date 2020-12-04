@@ -4,16 +4,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TotalSuaraActivity">
+    android:background="@color/colorWhite"
+    tools:context=".general.TotalSuaraActivity">
 
     <com.anychart.AnyChartView
         android:id="@+id/totalSuaraChart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/totalSuaraKeseluruhanSuaraTidakSah"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Suara Tidak Sah"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/totalSuaraKeseluruhanSuaraDPTTidakHadir"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_goneMarginBottom="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/totalSuaraKeseluruhanSuaraDPTTidakHadir"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="DPT Tidak Hadir"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/totalSuaraKeseluruhanSuaraTidakSah"
+        app:layout_goneMarginBottom="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/totalSuaraKeseluruhanMasuk"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Total Suara Masuk"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/totalSuaraKeseluruhanPersentaseSuaraMasuk"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/totalSuaraKeseluruhanPersentaseSuaraMasuk"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/totalSuaraKeseluruhanMasuk"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="1dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suara Tidak Sah"
+        app:layout_constraintBottom_toTopOf="@+id/totalSuaraKeseluruhanSuaraTidakSah"
+        app:layout_constraintEnd_toEndOf="@+id/totalSuaraKeseluruhanSuaraTidakSah"
+        app:layout_constraintStart_toStartOf="@+id/totalSuaraKeseluruhanSuaraTidakSah" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Suara Masuk"
+        app:layout_constraintBottom_toTopOf="@+id/totalSuaraKeseluruhanMasuk"
+        app:layout_constraintEnd_toEndOf="@+id/totalSuaraKeseluruhanMasuk"
+        app:layout_constraintStart_toStartOf="@+id/totalSuaraKeseluruhanMasuk" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DPT Tidak Hadir"
+        app:layout_constraintBottom_toTopOf="@+id/totalSuaraKeseluruhanSuaraDPTTidakHadir"
+        app:layout_constraintEnd_toEndOf="@+id/totalSuaraKeseluruhanSuaraDPTTidakHadir"
+        app:layout_constraintStart_toStartOf="@+id/totalSuaraKeseluruhanSuaraDPTTidakHadir"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Persentase Suara Masuk"
+        app:layout_constraintBottom_toTopOf="@+id/totalSuaraKeseluruhanPersentaseSuaraMasuk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/totalSuaraKeseluruhanPersentaseSuaraMasuk" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/totalSuaraKeseluruhanTPS"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Total TPS"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_goneMarginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jumlah TPS Masuk"
+        app:layout_constraintBottom_toTopOf="@+id/totalSuaraKeseluruhanTPS"
+        app:layout_constraintEnd_toEndOf="@+id/totalSuaraKeseluruhanTPS"
+        app:layout_constraintStart_toStartOf="@+id/totalSuaraKeseluruhanTPS" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
