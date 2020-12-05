@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InputSuaraActivity">
+    tools:context=".owner.EditSuaraOwnerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/editSuaraTitle"
+            android:id="@+id/editSuaraOwnerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Input Suara"
+            android:text="Edit Suara"
             android:textColor="@color/colorPrimary"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/editSuaraKecamatanSpinner"
+            android:id="@+id/editSuaraOwnerKecamatanSpinner"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,42 +36,22 @@
             app:layout_constraintHorizontal_bias="0.452"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerTitle" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraNomorTPSLayout"
+            android:id="@+id/editSuaraOwnerDesaLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraKecamatanSpinner"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerKecamatanSpinner"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraKecamatanSpinner"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraKecamatanSpinner">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerKecamatanSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerKecamatanSpinner">
 
             <EditText
-                android:id="@+id/editSuaraNomorTPS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nomor TPS"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraDesaLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraNomorTPSLayout"
-            app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraNomorTPSLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraNomorTPSLayout">
-
-            <EditText
-                android:id="@+id/editSuaraDesa"
+                android:id="@+id/editSuaraOwnerDesa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Desa"
@@ -79,19 +59,39 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonSatuLayout"
+            android:id="@+id/editSuaraOwnerNomorTPSLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraDesaLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerDesaLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraDesaLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraDesaLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerDesaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerDesaLayout">
 
             <EditText
-                android:id="@+id/editSuaraCalonSatu"
+                android:id="@+id/editSuaraOwnerNomorTPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nomor TPS"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editSuaraOwnerCalonSatuLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerNomorTPSLayout"
+            app:layout_constraintHorizontal_bias="0.452"
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerNomorTPSLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerNomorTPSLayout">
+
+            <EditText
+                android:id="@+id/editSuaraOwnerCalonSatu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 1"
@@ -99,19 +99,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonDuaLayout"
+            android:id="@+id/editSuaraOwnerCalonDuaLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraCalonSatuLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerCalonSatuLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraCalonSatuLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonSatuLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerCalonSatuLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerCalonSatuLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonDua"
+                android:id="@+id/editSuaraOwnerCalonDua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 2"
@@ -119,19 +119,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonTigaLayout"
+            android:id="@+id/editSuaraOwnerCalonTigaLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraCalonDuaLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerCalonDuaLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraCalonDuaLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonDuaLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerCalonDuaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerCalonDuaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonTiga"
+                android:id="@+id/editSuaraOwnerCalonTiga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 3"
@@ -139,19 +139,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonEmpatLayout"
+            android:id="@+id/editSuaraOwnerCalonEmpatLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraCalonTigaLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerCalonTigaLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraCalonTigaLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonTigaLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerCalonTigaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerCalonTigaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonEmpat"
+                android:id="@+id/editSuaraOwnerCalonEmpat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 4"
@@ -159,19 +159,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraCalonLimaLayout"
+            android:id="@+id/editSuaraOwnerCalonLimaLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraCalonEmpatLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerCalonEmpatLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraCalonEmpatLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonEmpatLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerCalonEmpatLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerCalonEmpatLayout">
 
             <EditText
-                android:id="@+id/inputSuaraCalonLima"
+                android:id="@+id/editSuaraOwnerCalonLima"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Calon Nomor 5"
@@ -179,19 +179,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraTotalSuaraTidakSahLayout"
+            android:id="@+id/editSuaraOwnerTotalSuaraTidakSahLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraCalonLimaLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerCalonLimaLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraCalonLimaLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraCalonLimaLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerCalonLimaLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerCalonLimaLayout">
 
             <EditText
-                android:id="@+id/inputSuaraTotalSuaraTidakSah"
+                android:id="@+id/editSuaraOwnerTotalSuaraTidakSah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total Suara Tidak Sah"
@@ -199,19 +199,19 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editSuaraTotalSuaraTidakHadirLayout"
+            android:id="@+id/editSuaraOwnerTotalSuaraTidakHadirLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:helperTextEnabled="true"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraTotalSuaraTidakSahLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerTotalSuaraTidakSahLayout"
             app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraTotalSuaraTidakSahLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraTotalSuaraTidakSahLayout">
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerTotalSuaraTidakSahLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerTotalSuaraTidakSahLayout">
 
             <EditText
-                android:id="@+id/inputSuaraTotalSuaraTidakHadir"
+                android:id="@+id/editSuaraOwnerTotalSuaraTidakHadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Total DPT Tidak Hadir"
@@ -219,7 +219,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/editSuaraBuktiSuratSuaraTextView"
+            android:id="@+id/editSuaraOwnerBuktiSuratSuaraTextView"
             style="@style/ShadowForText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -229,23 +229,23 @@
             android:text="Bukti Surat Suara"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraTotalSuaraTidakHadirLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraTotalSuaraTidakHadirLayout" />
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerTotalSuaraTidakHadirLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerTotalSuaraTidakHadirLayout" />
 
         <ImageView
-            android:id="@+id/editSuaraBuktiSuratSuaraImage"
+            android:id="@+id/editSuaraOwnerBuktiSuratSuaraImage"
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:src="@drawable/insert_image"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraTotalSuaraTidakHadirLayout"
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerTotalSuaraTidakHadirLayout"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraTotalSuaraTidakHadirLayout"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraBuktiSuratSuaraTextView" />
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerTotalSuaraTidakHadirLayout"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerBuktiSuratSuaraTextView" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/editSuaraKonfirmasiButton"
+            android:id="@+id/editSuaraOwnerKonfirmasiButton"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -255,23 +255,10 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:textSize="14sp"
             app:backgroundTint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraBuktiSuratSuaraImage"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraBuktiSuratSuaraImage"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraBuktiSuratSuaraImage" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/editSuaraLogOut"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-            android:textSize="14sp"
-            app:backgroundTint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/editSuaraKonfirmasiButton"
-            app:layout_constraintStart_toStartOf="@+id/editSuaraKonfirmasiButton"
-            app:layout_constraintTop_toBottomOf="@+id/editSuaraKonfirmasiButton" />
+            app:layout_constraintEnd_toEndOf="@+id/editSuaraOwnerBuktiSuratSuaraImage"
+            app:layout_constraintStart_toStartOf="@+id/editSuaraOwnerBuktiSuratSuaraImage"
+            app:layout_constraintTop_toBottomOf="@+id/editSuaraOwnerBuktiSuratSuaraImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

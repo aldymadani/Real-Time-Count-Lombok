@@ -11,10 +11,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -29,10 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.realtimecountlombok.InputSuaraActivity;
 import com.example.realtimecountlombok.R;
-import com.example.realtimecountlombok.adapter.ListSuaraAdapter;
-import com.example.realtimecountlombok.general.LoginActivity;
 import com.example.realtimecountlombok.model.SuaraKecamatan;
 import com.example.realtimecountlombok.util.constant.RequestCodeConstant;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +39,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -108,14 +104,43 @@ public class InputSuaraFragment extends Fragment implements View.OnFocusChangeLi
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestCodeConstant.GALLERY_PICK);
-                } else {
-                    Intent galleryIntent = new Intent();
-                    galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                    galleryIntent.setType("image/*");
-                    startActivityForResult(galleryIntent, RequestCodeConstant.GALLERY_PICK);
-                }
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                View takeImageOptionDialog = getLayoutInflater().inflate(R.layout.dialog_option, null);
+                mBuilder.setView(takeImageOptionDialog);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                Button cameraButton = takeImageOptionDialog.findViewById(R.id.dialogOptionKamera);
+                Button galleryButton = takeImageOptionDialog.findViewById(R.id.dialogOptionGaleri);
+
+                cameraButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, RequestCodeConstant.TAKE_IMAGE_CODE);
+                        } else {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                                startActivityForResult(intent, RequestCodeConstant.TAKE_IMAGE_CODE);
+                            }
+                        }
+                    }
+                });
+
+                galleryButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestCodeConstant.GALLERY_PICK);
+                        } else {
+                            Intent galleryIntent = new Intent();
+                            galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                            galleryIntent.setType("image/*");
+                            startActivityForResult(galleryIntent, RequestCodeConstant.GALLERY_PICK);
+                        }
+                    }
+                });
             }
         });
 
@@ -125,7 +150,16 @@ public class InputSuaraFragment extends Fragment implements View.OnFocusChangeLi
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == RequestCodeConstant.GALLERY_PICK) {
+        if (requestCode == RequestCodeConstant.TAKE_IMAGE_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(intent, RequestCodeConstant.TAKE_IMAGE_CODE);
+                }
+            } else {
+                Toast.makeText(getContext(), "Camera Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == RequestCodeConstant.GALLERY_PICK) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -154,13 +188,22 @@ public class InputSuaraFragment extends Fragment implements View.OnFocusChangeLi
                     }
             }
         }
+
+        if (requestCode == RequestCodeConstant.TAKE_IMAGE_CODE) {
+            switch (resultCode) {
+                case RESULT_OK:
+                    bitmap = (Bitmap) data.getExtras().get("data");
+                    buktiSuaraImage.setImageBitmap(bitmap);
+                    hasImage = true;
+            }
+        }
     }
 
     private void handleUpload(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-        final StorageReference reference = FirebaseStorage.getInstance().getReference().child(kecamatan.getSelectedItem().toString()).child(kecamatan.getSelectedItem().toString() + " " + nomorTPS.getText().toString() + ".jpeg");
+        final StorageReference reference = FirebaseStorage.getInstance().getReference().child(kecamatan.getSelectedItem().toString()).child(desa.getText().toString() + " " + nomorTPS.getText().toString() + ".jpeg");
 
         reference.putBytes(baos.toByteArray())
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -194,7 +237,7 @@ public class InputSuaraFragment extends Fragment implements View.OnFocusChangeLi
         SuaraKecamatan suaraKecamatan = new SuaraKecamatan();
         suaraKecamatan.setNamaKecamatan(dataKecamatan);
         suaraKecamatan.setNomorTPS(dataNomorTPS);
-        suaraKecamatan.setDesa(dataDesa);
+        suaraKecamatan.setDesa(dataDesa.toLowerCase());
         suaraKecamatan.setPerolehanSuaraCalonPertama(Integer.parseInt(dataCalonPertama));
         suaraKecamatan.setPerolehanSuaraCalonKedua(Integer.parseInt(dataCalonKedua));
         suaraKecamatan.setPerolehanSuaraCalonKetiga(Integer.parseInt(dataCalonKetiga));

@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.realtimecountlombok.InputSuaraActivity;
 import com.example.realtimecountlombok.R;
 import com.example.realtimecountlombok.admin.MainManageSuaraActivity;
+import com.example.realtimecountlombok.owner.PilihKecamatanActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -185,9 +185,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     textInputPassword.setErrorEnabled(false);
                     textInputEmail.setErrorEnabled(false);
                     String uuid = mFirebaseAuth.getCurrentUser().getUid();
-                    Intent intent = new Intent(LoginActivity.this, MainManageSuaraActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    if (mFirebaseAuth.getCurrentUser().getEmail().equalsIgnoreCase("admin@gmail.com")) {
+                        Intent intent = new Intent(LoginActivity.this, PilihKecamatanActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginActivity.this, MainManageSuaraActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                 }
                 btnSubmit.setVisibility(View.VISIBLE);
                 btnRegister.setEnabled(true);

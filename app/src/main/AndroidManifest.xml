@@ -5,20 +5,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_new_round"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_new_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealTimeCountLombok.Light">
-        <activity android:name=".general.RegisterActivity"></activity>
+        <activity android:name=".owner.EditSuaraOwnerActivity"></activity>
+        <activity android:name=".owner.PilihKecamatanActivity" />
+        <activity android:name=".general.RegisterActivity" />
         <activity android:name=".admin.EditSuaraActivity" />
         <activity android:name=".admin.MainManageSuaraActivity" />
         <activity android:name=".general.TotalSuaraKecamatanActivity" />
         <activity android:name=".general.TotalSuaraActivity" />
-        <activity android:name=".InputSuaraActivity" />
         <activity android:name=".general.LoginActivity" />
         <activity android:name=".general.SplashScreenActivity">
             <intent-filter>

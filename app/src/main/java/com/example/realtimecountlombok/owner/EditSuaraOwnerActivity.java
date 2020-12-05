@@ -1,4 +1,4 @@
-package com.example.realtimecountlombok.admin;
+package com.example.realtimecountlombok.owner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +26,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.realtimecountlombok.R;
-import com.example.realtimecountlombok.general.LoginActivity;
+import com.example.realtimecountlombok.admin.EditSuaraActivity;
+import com.example.realtimecountlombok.admin.MainManageSuaraActivity;
 import com.example.realtimecountlombok.model.SuaraKecamatan;
 import com.example.realtimecountlombok.util.constant.RequestCodeConstant;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,13 +47,13 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class EditSuaraActivity extends AppCompatActivity implements View.OnFocusChangeListener {
+public class EditSuaraOwnerActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
     private static final String TAG = "EditSuaraActivity";
 
     EditText nomorTPS, desa, calonPertama, calonKedua, calonKetiga, calonKeempat, calonKelima, totalSuaraTidakSah, totalDPTTidakHadir;
     TextInputLayout nomorTPSLayout, desaLayout, calonPertamaLayout, calonKeduaLayout, calonKetigaLayout, calonKeempatLayout, calonKelimaLayout, totalSuaraTidakSahLayout, totalDPTTidakHadirLayout;
-    Button konfirmasiButton, logOutButton;
+    Button konfirmasiButton;
     Spinner kecamatan;
     ImageView buktiSuaraImage;
     boolean imageHasChange;
@@ -67,16 +68,14 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_suara);
+        setContentView(R.layout.activity_edit_suara_owner);
         Intent intent = getIntent();
-        suaraKecamatanOld = intent.getParcelableExtra("suaraKecamatan");
+        suaraKecamatanOld = intent.getParcelableExtra("SuaraKecamatan");
         componentsInitialization();
         konfirmasiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (suaraKecamatanOld.getEditLimit() == 2) {
-                    Toast.makeText(EditSuaraActivity.this, "Anda telah melewati limit untuk mengedit suara", Toast.LENGTH_SHORT).show();
-                } else if (informationValidation(calonPertama.getText().toString(), calonKedua.getText().toString(), calonKetiga.getText().toString(), calonKeempat.getText().toString(), calonKelima.getText().toString(), totalSuaraTidakSah.getText().toString(), totalDPTTidakHadir.getText().toString())) {
+                if (informationValidation(calonPertama.getText().toString(), calonKedua.getText().toString(), calonKetiga.getText().toString(), calonKeempat.getText().toString(), calonKelima.getText().toString(), totalSuaraTidakSah.getText().toString(), totalDPTTidakHadir.getText().toString())) {
                     if (imageHasChange) {
                         handleUpload(bitmap);
                     } else {
@@ -90,7 +89,7 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(EditSuaraActivity.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(EditSuaraOwnerActivity.this);
                 View takeImageOptionDialog = getLayoutInflater().inflate(R.layout.dialog_option, null);
                 mBuilder.setView(takeImageOptionDialog);
                 final AlertDialog dialog = mBuilder.create();
@@ -103,7 +102,7 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
                     public void onClick(View v) {
                         dialog.dismiss();
                         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(EditSuaraActivity.this, new String[]{Manifest.permission.CAMERA}, RequestCodeConstant.TAKE_IMAGE_CODE);
+                            ActivityCompat.requestPermissions(EditSuaraOwnerActivity.this, new String[]{Manifest.permission.CAMERA}, RequestCodeConstant.TAKE_IMAGE_CODE);
                         } else {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             if (intent.resolveActivity(getPackageManager()) != null) {
@@ -130,6 +129,7 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
             }
         });
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -269,8 +269,8 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
         batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(EditSuaraActivity.this, "Suara telah berhasil diupdate", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EditSuaraActivity.this, MainManageSuaraActivity.class);
+                Toast.makeText(EditSuaraOwnerActivity.this, "Suara telah berhasil diupdate", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditSuaraOwnerActivity.this, PilihKecamatanActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -344,31 +344,30 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
     }
 
     private void componentsInitialization() {
-        kecamatan = findViewById(R.id.editSuaraKecamatanSpinner);
-        nomorTPS = findViewById(R.id.editSuaraNomorTPS);
-        desa = findViewById(R.id.editSuaraDesa);
-        calonPertama = findViewById(R.id.editSuaraCalonSatu);
-        calonKedua = findViewById(R.id.editSuaraCalonDua);
-        calonKetiga = findViewById(R.id.editSuaraCalonTiga);
-        calonKeempat = findViewById(R.id.editSuaraCalonEmpat);
-        calonKelima = findViewById(R.id.editSuaraCalonLima);
-        totalSuaraTidakSah = findViewById(R.id.editSuaraTotalSuaraTidakSah);
-        totalDPTTidakHadir = findViewById(R.id.editSuaraTotalSuaraTidakHadir);
+        kecamatan = findViewById(R.id.editSuaraOwnerKecamatanSpinner);
+        nomorTPS = findViewById(R.id.editSuaraOwnerNomorTPS);
+        desa = findViewById(R.id.editSuaraOwnerDesa);
+        calonPertama = findViewById(R.id.editSuaraOwnerCalonSatu);
+        calonKedua = findViewById(R.id.editSuaraOwnerCalonDua);
+        calonKetiga = findViewById(R.id.editSuaraOwnerCalonTiga);
+        calonKeempat = findViewById(R.id.editSuaraOwnerCalonEmpat);
+        calonKelima = findViewById(R.id.editSuaraOwnerCalonLima);
+        totalSuaraTidakSah = findViewById(R.id.editSuaraOwnerTotalSuaraTidakSah);
+        totalDPTTidakHadir = findViewById(R.id.editSuaraOwnerTotalSuaraTidakHadir);
 
-        nomorTPSLayout = findViewById(R.id.editSuaraNomorTPSLayout);
-        desaLayout = findViewById(R.id.editSuaraDesaLayout);
-        calonPertamaLayout = findViewById(R.id.editSuaraCalonSatuLayout);
-        calonKeduaLayout = findViewById(R.id.editSuaraCalonDuaLayout);
-        calonKetigaLayout = findViewById(R.id.editSuaraCalonTigaLayout);
-        calonKeempatLayout = findViewById(R.id.editSuaraCalonEmpatLayout);
-        calonKelimaLayout = findViewById(R.id.editSuaraCalonLimaLayout);
-        totalSuaraTidakSahLayout = findViewById(R.id.editSuaraTotalSuaraTidakSahLayout);
-        totalDPTTidakHadirLayout = findViewById(R.id.editSuaraTotalSuaraTidakHadirLayout);
+        nomorTPSLayout = findViewById(R.id.editSuaraOwnerNomorTPSLayout);
+        desaLayout = findViewById(R.id.editSuaraOwnerDesaLayout);
+        calonPertamaLayout = findViewById(R.id.editSuaraOwnerCalonSatuLayout);
+        calonKeduaLayout = findViewById(R.id.editSuaraOwnerCalonDuaLayout);
+        calonKetigaLayout = findViewById(R.id.editSuaraOwnerCalonTigaLayout);
+        calonKeempatLayout = findViewById(R.id.editSuaraOwnerCalonEmpatLayout);
+        calonKelimaLayout = findViewById(R.id.editSuaraOwnerCalonLimaLayout);
+        totalSuaraTidakSahLayout = findViewById(R.id.editSuaraOwnerTotalSuaraTidakSahLayout);
+        totalDPTTidakHadirLayout = findViewById(R.id.editSuaraOwnerTotalSuaraTidakHadirLayout);
 
-        konfirmasiButton = findViewById(R.id.editSuaraKonfirmasiButton);
-        logOutButton = findViewById(R.id.editSuaraLogOut);
+        konfirmasiButton = findViewById(R.id.editSuaraOwnerKonfirmasiButton);
 
-        buktiSuaraImage = findViewById(R.id.editSuaraBuktiSuratSuaraImage);
+        buktiSuaraImage = findViewById(R.id.editSuaraOwnerBuktiSuratSuaraImage);
 
         nomorTPS.setOnFocusChangeListener(this);
         desa.setOnFocusChangeListener(this);
@@ -401,7 +400,7 @@ public class EditSuaraActivity extends AppCompatActivity implements View.OnFocus
             @Override
             public void onError(Exception e) {
 //                imageEventPhotoProgressBar.setVisibility(View.GONE);
-                Toast.makeText(EditSuaraActivity.this, "Error in loading the image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditSuaraOwnerActivity.this, "Error in loading the image", Toast.LENGTH_SHORT).show();
             }
         });
 

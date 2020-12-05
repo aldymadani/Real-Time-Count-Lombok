@@ -22,7 +22,6 @@ public class SuaraKecamatan implements Parcelable {
     private String imageURL;
     private String suaraKecamatanId;
     private int editLimit;
-    private @ServerTimestamp Date timestamp;
 
     public SuaraKecamatan() {
         // Empty constructor
@@ -170,14 +169,6 @@ public class SuaraKecamatan implements Parcelable {
 
     public void setEditLimit(int editLimit) {
         this.editLimit = editLimit;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     protected SuaraKecamatan(Parcel in) {

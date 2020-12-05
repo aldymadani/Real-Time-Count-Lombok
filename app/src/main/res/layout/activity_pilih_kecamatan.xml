@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".owner.PilihKecamatanActivity">
+
+    <TextView
+        android:id="@+id/pilihKecamatanTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Pilih Kecamatan"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/pilihKecamatanSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pilihKecamatanTitle" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pilihKecamatanDesaLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/pilihKecamatanSpinner"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="@+id/pilihKecamatanSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/pilihKecamatanSpinner">
+
+        <EditText
+            android:id="@+id/pilihKecamatanDesa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Desa"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pilihKecamatanNomorTPSLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/pilihKecamatanDesaLayout"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="@+id/pilihKecamatanDesaLayout"
+        app:layout_constraintTop_toBottomOf="@+id/pilihKecamatanDesaLayout">
+
+        <EditText
+            android:id="@+id/pilihKecamatanNomorTPS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nomor TPS"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pilihKecamatanKonfirmasiButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Konfirmasi"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/pilihKecamatanNomorTPSLayout"
+        app:layout_constraintStart_toStartOf="@+id/pilihKecamatanNomorTPSLayout"
+        app:layout_constraintTop_toBottomOf="@+id/pilihKecamatanNomorTPSLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pilihKecamatanLogOutButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/pilihKecamatanKonfirmasiButton"
+        app:layout_constraintStart_toStartOf="@+id/pilihKecamatanKonfirmasiButton"
+        app:layout_constraintTop_toBottomOf="@+id/pilihKecamatanKonfirmasiButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.realtimecountlombok.InputSuaraActivity;
 import com.example.realtimecountlombok.R;
 import com.example.realtimecountlombok.admin.MainManageSuaraActivity;
+import com.example.realtimecountlombok.owner.PilihKecamatanActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,10 +29,15 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 FirebaseUser user = mFirebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     // User is signed in, send to main menu
-                    Intent intent = new Intent(SplashScreenActivity.this, MainManageSuaraActivity.class);
-                    startActivity(intent);
+                    if (user.getEmail().equalsIgnoreCase("admin@gmail.com")) {
+                        Intent intent = new Intent(SplashScreenActivity.this, PilihKecamatanActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(SplashScreenActivity.this, MainManageSuaraActivity.class);
+                        startActivity(intent);
+                    }
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out, send to login page
                     Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
